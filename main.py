@@ -17,10 +17,10 @@ def extract(data_info):
     return value
 
 
-def store(extracted):
+def store(extr):
     now = datetime.now().strftime("%y-%m-%d-%H-%M-%S")
     with open("data.txt", "a") as file:
-        line = f"{now},{extracted}\n"
+        line = f"{now},{extr}\n"
         file.write(line)
 
 
