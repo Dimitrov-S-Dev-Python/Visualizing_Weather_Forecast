@@ -1,10 +1,21 @@
 import streamlit as st
 import plotly.express as px
-import pandas
+# import pandas
+#
+# df = pandas.read_csv("data.txt")
+import sqlite3
 
-df = pandas.read_csv("data.txt")
+connection = sqlite3.connect("data.db")
+cursor = connection.cursor()
+cursor.execute("SELECT date FROM weather")
+date = cursor.fetchall()
+date = [item[0] for item in date]
 
-figure = px.line(x=df["date"], y=df["temp"],
+cursor.execute("SELECT temp FROM weather")
+temp = cursor.fetchall()
+temp = [item[0] for item in temp]
+
+figure = px.line(x=date, y=temp,
                  labels={"x": "Date", "y": "Temperature (C)"})
 
 st.plotly_chart(figure)
